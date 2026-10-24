@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>משפחת אלבוחר המורחבת</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karantina:wght@400;700&family=Frank+Ruhl+Libre:wght@400;500;700&family=IBM+Plex+Sans+Hebrew:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Suez+One&family=Assistant:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* STORY TEMPLATE. Copy this file, replace every EXAMPLE block with the real group, keep the components.
+   The double-brace labels are filled by build.py from the chosen writing style (presets.json voices[...].story); you may also hard-code them.
+   Colors are authored in the default palette; build.py --story re-themes them to match the report.
+   Layout: a tabloid investigation in one RTL reading column — condensed headlines, serif body, case-file cards per member, orange only for marks and numbers. Dark by design, same world as the stats report. */
+:root {
+  --ink: #f4ede2;
+  --panel: #fffdf8;
+  --panel-2: #efe5d6;
+  --line: #e2d4bf;
+  --cream: #3a2a1f;
+  --soft: #7a6655;
+  --orange: #b0435c;
+  --ember: #8f2f47;
+  --display: "Karantina", "Arial Narrow", "Heebo", sans-serif;
+  --serif: "Frank Ruhl Libre", "David", "Times New Roman", serif;
+  --ui: "IBM Plex Sans Hebrew", "Heebo", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+body { background: var(--ink); color: var(--cream); font-family: var(--serif); font-size: 19px; line-height: 1.75; direction: rtl; -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 760px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wide { max-width: 1040px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 700; line-height: .92; margin: 0; text-wrap: balance; }
+p { margin: 0 0 1.1em; }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; font-size: .88em; }
+b, strong { color: var(--ember); font-weight: 700; }
+a { color: var(--ember); }
+:focus-visible { outline: 2px solid var(--ember); outline-offset: 2px; }
+
+.mast { border-bottom: 1px solid var(--line); padding-block: 18px; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; color: var(--soft); text-transform: uppercase; }
+.mast .wrap { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.mast .stamp { color: var(--orange); }
+
+.hero { padding-block: 56px 32px; }
+.kicker { font-family: var(--ui); font-size: 14px; font-weight: 600; color: var(--ink); background: var(--orange); display: inline-block; padding: 3px 12px; border-radius: 3px; letter-spacing: .02em; }
+.hero h1 { font-size: calc(clamp(60px, 11vw, 124px) * var(--ds, 1)); margin-top: 20px; }
+.hero h1 em { font-style: normal; color: var(--orange); }
+.deck { font-family: var(--ui); font-size: clamp(19px, 2.4vw, 23px); line-height: 1.5; color: var(--soft); margin-top: 22px; max-width: 40ch; }
+.byline { font-family: var(--ui); font-size: 13px; color: var(--soft); margin-top: 26px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.byline i { width: 30px; height: 30px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, var(--ember), var(--orange) 55%, #8f2f47); display: inline-block; }
+
+.lead::first-letter { font-family: var(--display); float: right; font-size: calc(112px * var(--ds, 1)); line-height: .75; margin: 8px 0 0 12px; color: var(--orange); }
+article section { padding-block: 40px 10px; }
+article h2 { font-size: calc(clamp(44px, 7vw, 68px) * var(--ds, 1)); margin-bottom: 18px; }
+article h2 small { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: .14em; color: var(--orange); margin-bottom: 10px; font-weight: 400; }
+
+blockquote { margin: 28px 0; padding: 0 22px 0 0; border-right: 3px solid var(--orange); }
+blockquote p { font-family: var(--ui); font-size: 20px; line-height: 1.5; margin: 0 0 6px; color: var(--cream); }
+blockquote cite { font-family: var(--ui); font-style: normal; font-size: 13px; color: var(--soft); }
+.pull { font-family: var(--display); font-size: calc(clamp(46px, 8vw, 84px) * var(--ds, 1)); line-height: .95; color: var(--orange); margin: 36px 0; text-wrap: balance; }
+.pull span { color: var(--cream); }
+
+.big { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin: 28px 0; font-family: var(--ui); }
+.big div { background: var(--ink); padding: 16px 18px; }
+.big b { display: block; font-family: var(--display); font-size: calc(54px * var(--ds, 1)); line-height: 1; color: var(--cream); font-weight: 700; }
+.big span { font-size: 13px; color: var(--soft); line-height: 1.4; display: block; }
+
+.files { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; margin-top: 24px; }
+.file { background: var(--panel); border: 1px solid var(--line); border-radius: 4px 18px 18px 18px; padding: 20px 22px 22px; font-family: var(--ui); font-size: 15px; line-height: 1.6; display: grid; gap: 10px; align-content: start; position: relative; }
+.file .tab { position: absolute; top: -1px; right: 22px; transform: translateY(-100%); background: var(--panel); border: 1px solid var(--line); border-bottom: none; border-radius: 8px 8px 0 0; padding: 2px 12px; font-family: var(--mono); font-size: 11px; color: var(--orange); letter-spacing: .1em; }
+.file h3 { font-size: calc(40px * var(--ds, 1)); color: var(--cream); }
+.file .alias { font-family: var(--display); font-size: calc(26px * var(--ds, 1)); line-height: 1; color: var(--orange); }
+.file .ev { display: flex; align-items: baseline; gap: 10px; border-block: 1px dashed var(--line); padding-block: 10px; }
+.file .ev b { font-family: var(--display); font-size: calc(44px * var(--ds, 1)); line-height: .9; color: var(--cream); }
+.file .ev span { color: var(--soft); font-size: 13px; line-height: 1.35; }
+.file q { display: block; quotes: none; color: var(--cream); border-right: 2px solid var(--orange); padding-right: 12px; }
+.file q + small { color: var(--soft); font-size: 12px; margin-top: -6px; }
+.file .verdict { color: var(--soft); font-size: 14px; }
+.file .verdict strong { color: var(--orange); }
+
+.diag { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 26px 26px 18px; margin-top: 18px; font-family: var(--ui); font-size: 16px; }
+.diag h3 { font-size: calc(40px * var(--ds, 1)); margin-bottom: 12px; }
+.diag ol { margin: 0; padding: 0 22px 0 0; display: grid; gap: 10px; }
+.diag li::marker { color: var(--orange); font-family: var(--mono); }
+.sig { font-family: var(--mono); font-size: 12px; color: var(--soft); margin-top: 16px; border-top: 1px dashed var(--line); padding-top: 12px; }
+
+.cta { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; border: 1px solid var(--orange); border-radius: 18px; padding: 20px 24px; margin-block: 50px 20px; font-family: var(--ui); }
+.cta a { background: var(--orange); color: var(--ink); text-decoration: none; padding: 10px 20px; border-radius: 99px; font-weight: 600; }
+footer { padding-block: 30px 60px; font-family: var(--ui); font-size: 13px; color: var(--soft); }
+footer .wrap { border-top: 1px solid var(--line); padding-top: 22px; }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .file { transition: transform .45s cubic-bezier(.16,1,.3,1), border-color .3s, box-shadow .45s cubic-bezier(.16,1,.3,1); }
+  .file:hover { transform: translateY(-4px); border-color: #b0435c55; box-shadow: 0 18px 40px -18px rgba(0,0,0,.8); }
+  .file:hover .tab { border-color: #b0435c55; }
+  .cta a { transition: transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s; }
+  .cta a:hover { transform: translateY(-2px); box-shadow: 0 10px 24px -10px #b0435c; }
+}
+@media (max-width: 560px) { body { font-size: 18px; } .lead::first-letter { font-size: 84px; } .file h3 { font-size: 34px; } }
+</style>
+<style>
+/* Shared base for every light skin: loaded before the skin's own file. */
+:root { color-scheme: light; }
+html, body { background: var(--ink); }
+::selection { background: var(--orange); color: #fff; }
+html { scrollbar-color: var(--line) var(--ink); }
+#tip { background: var(--cream); color: var(--panel); border-color: transparent; box-shadow: 0 8px 20px -10px rgba(0,0,0,.35); }
+.row .bar, .mrow .bar { background: var(--panel-2); }
+.chip { background: color-mix(in srgb, var(--orange) 10%, var(--panel)); color: var(--ember); border-color: color-mix(in srgb, var(--orange) 28%, transparent); }
+.pod.first { border-color: color-mix(in srgb, var(--orange) 45%, transparent); background: linear-gradient(to bottom, color-mix(in srgb, var(--orange) 10%, var(--panel)), var(--panel)); }
+.card { background: var(--panel); }
+.statrow > div { background: var(--panel); }
+.day.quiet { background: transparent; }
+.lead::first-letter, b, strong { color: var(--orange); }
+.byline i { background: radial-gradient(circle at 35% 35%, color-mix(in srgb, var(--orange) 40%, #fff), var(--orange) 60%, var(--ember)); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .card:hover, .award:hover, .day:hover, .tile:hover, .bond:hover, .emojis > div:hover, .file:hover {
+    box-shadow: 0 16px 32px -18px color-mix(in srgb, var(--cream) 45%, transparent);
+    border-color: color-mix(in srgb, var(--orange) 45%, var(--line));
+  }
+}
+
+/* FAMILY: the photo album on the living-room shelf. Grainy paper, handwritten headings, polaroid cards held with tape, rose and honey. */
+:root {
+  --display: "Amatic SC", "Suez One", cursive;
+  --body: "Assistant", "Heebo", system-ui, sans-serif;
+  --ui: "Assistant", "Heebo", system-ui, sans-serif;
+  --serif: "Suez One", "Frank Ruhl Libre", serif;
+  --ds: 1.02;
+  --tape: color-mix(in srgb, var(--accent2, #e9b05c) 42%, transparent);
+}
+body { background-image: radial-gradient(rgba(110,80,50,.07) 1px, transparent 1.2px), radial-gradient(rgba(110,80,50,.05) 1px, transparent 1.2px); background-size: 7px 7px, 11px 11px; background-position: 0 0, 3px 5px; font-size: 17px; }
+h1, h2, h3 { font-weight: 700; letter-spacing: .01em; line-height: .95; }
+h2 em, .hero h1 span, .hero h1 em { color: var(--orange); }
+.eyebrow { font-family: var(--display); font-weight: 700; font-size: 26px; letter-spacing: .02em; text-transform: none; color: var(--orange); }
+.bignum .n { font-weight: 700; color: var(--cream); }
+.statrow b, .tile .v, .day .c, .pod .t, .card .stats b, .bond .x, .big b, .file .ev b { font-family: var(--serif); font-weight: 400; letter-spacing: 0; font-size: calc(var(--fs, 1em) * 1); }
+.statrow b { font-size: 30px; } .tile .v { font-size: 42px; } .day .c { font-size: 34px; } .pod .t { font-size: 36px; } .card .stats b { font-size: 20px; } .bond .x { font-size: 26px; }
+.big b { font-size: 36px; } .file .ev b { font-size: 30px; }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; box-shadow: 0 1px 2px rgba(58,42,31,.06); }
+.statrow { border-radius: 6px; }
+/* polaroids */
+.day, .award, .card, .file, .tile, .bond, .emojis > div, .pod {
+  background: #fff; border: 0; border-radius: 3px; position: relative; overflow: visible;
+  box-shadow: 0 12px 26px -16px rgba(58,42,31,.45), 0 1px 2px rgba(58,42,31,.14);
+}
+.day, .award, .card, .file { padding-bottom: 28px; }
+.day:nth-child(odd), .award:nth-child(odd), .file:nth-child(odd) { transform: rotate(-1.1deg); }
+.day:nth-child(even), .award:nth-child(even), .file:nth-child(even) { transform: rotate(.9deg); }
+.day::before, .award::before, .card::before, .file::before {
+  content: ""; position: absolute; top: -9px; left: 50%; width: 76px; height: 20px; background: var(--tape);
+  transform: translateX(-50%) rotate(-3deg); box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+.award .ttl { color: var(--orange); font-size: calc(32px * 1.1); }
+.award .ic { color: color-mix(in srgb, var(--orange) 40%, transparent); }
+.card .rank { color: var(--orange); }
+.row { border-bottom: 1px dashed var(--line); }
+.row .bar i { background: linear-gradient(to left, var(--orange), color-mix(in srgb, var(--orange) 50%, #e9a23b)); }
+.mrow .bar i { background: var(--orange); }
+.card .spark i { background: color-mix(in srgb, var(--orange) 30%, #fff); }
+.card .spark i.pk { background: var(--orange); }
+.more { background: #fff; color: var(--cream); border: 1px solid var(--line); }
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .day:hover, .award:hover, .card:hover, .file:hover, .tile:hover { transform: rotate(0deg) translateY(-4px); }
+}
+/* story */
+.mast { border-bottom: 1px dashed var(--line); }
+.kicker { background: var(--orange); color: #fff; border-radius: 3px; }
+.file .tab { display: none; }
+blockquote { border-right: 0; background: #fff; padding: 14px 18px; box-shadow: 0 10px 22px -16px rgba(58,42,31,.4); transform: rotate(-.6deg); }
+.lead::first-letter { font-family: var(--display); }
+.cta { border: 1px dashed var(--orange); border-radius: 6px; }
+.cta a { color: #fff; border-radius: 4px; }
+
+/* Suez One numerals are tall: give each digit drum more room so the neighbouring digits never peek in */
+body .odo-d, body .odo-s > span, body .odo-c { height: 1.32em; line-height: 1.32em; }
+body .odo-d, body .odo-c { margin-block: -.16em; }
+
+</style>
+
+<div class="mast"><div class="wrap wide"><span>משפחת אלבוחר המורחבת · טור רכילות</span><span class="stamp">בלעדי · לא לפרסום</span></div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="kicker">בלעדי</span>
+  <h1>15,685 הודעות, 692 ״מזל טוב״, <em>וסבתא אחת שאומרת לכולם ״אהובים״.</em></h1>
+  <p class="deck">טור הרכילות נכנס למשפחת אלבוחר המורחבת. מי מברכת ראשונה, מי שולחת 130 תמונות בארבע דקות, ומי לא שאלה שאלה אחת מאז 2019.</p>
+  <div class="byline"><i aria-hidden="true"></i><span>מאת קלוד, כתב הרכילות שלנו · 24 באוקטובר 2026 · זמן קריאה: פחות מברכת יום הולדת של סבתא</span></div>
+</div></header>
+
+<article>
+<div class="wrap">
+  <p class="lead">יש קבוצות של משפחה, ויש מכונת ברכות. מאז 23 בדצמבר 2019 נכתבו כאן 692 ״מזל טוב״, 646 ״בוקר טוב״, 524 ״שבת שלום״, ו־1,601 הודעות עם ❤️. כלומר, אם מישהו במשפחה חוגג משהו, הוא יודע על זה מהקבוצה לפני שהוא יודע על זה בעצמו.</p>
+  <p>מקורבים למשפחה מספרים שהכל מתחיל, כמעט כל בוקר, במילה אחת.</p>
+</div>
+
+<section><div class="wrap">
+  <h2><small>בלעדי</small>״אהובים״</h2>
+  <p>221 הודעות של סבתא מזל נפתחות במילה ״אהובים״. בסך הכל המילה נכתבה בקבוצה 264 פעמים, ו־254 מהן של סבתא. זה לא סגנון כתיבה. זה מותג.</p>
+  <p class="pull">387 <span>מתוך 392 ה־💓 בקבוצה הם של סבתא.</span></p>
+  <p>והנכדים כבר הבינו את הפוטנציאל:</p>
+  <blockquote><p>סבתא צריך לעשות לך טיקטוק😏😊😂❤️</p><cite>מאי, 23.6.2026</cite></blockquote>
+</div></section>
+
+<section><div class="wrap">
+  <h2><small>בלעדי</small>היום שבו הקבוצה התפוצצה</h2>
+  <p>26 ביולי 2026: 173 הודעות, השיא של הקבוצה. בארבע וחצי אחר הצהריים מגיעות התודות, אחת אחרי השנייה, בתוך דקה:</p>
+  <blockquote><p>סבתא תודה היה לי כיף ממש</p><cite>אלון, 16:29</cite></blockquote>
+  <blockquote><p>תודה סבתא על היום היה כיף</p><cite>דניאל, 16:30</cite></blockquote>
+  <p>ובאותו לילה, בין 23:25 ל־23:29, שירה שולחת 130 תמונות ברצף. ארבע דקות, אלבום שלם, ובלי סימן שאלה אחד. כרגיל.</p>
+</div></section>
+
+<section><div class="wrap wide">
+  <div class="wrap" style="padding:0">
+    <h2><small>בלעדי</small>מי מי בקבוצה</h2>
+    <p>השמות שכולם מדברים עליהם, ומה שהם לא רוצים שתדעו (על ההרגלים שלהם בוואטסאפ, כמובן).</p>
+  </div>
+  <div class="files">
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>מזל אלבוחר</h3><div class="alias">הסבתא שמנהלת את הקבוצה</div>
+      <div class="ev"><b>221</b><span>הודעות שנפתחות במילה ״אהובים״. בסך הכל ״אהובים״ נכתב בקבוצה 264 פעמים, ו־254 מהן של סבתא.</span></div>
+      <p>387 מתוך 392 ה־💓 שנשלחו אי פעם בקבוצה, 99%. מקום ראשון ב־🙏 (402), ב״בוקר טוב״ (197), ב״בריאות״ (114), ב־🎂 וב־🥳. ו־20.5 מילים בממוצע להודעה, הכי הרבה בקבוצה, בפער. כשסבתא מברכת, היא מברכת עד הסוף. שעת השיא: שמונה בבוקר.</p>
+      <q>אהובים ❤️בוקר טוב💝 / לאורית ויובל יום נישואים שמחחח💞</q><small>מזל אלבוחר, 11.8.2025. הנוסח הקבוע, בגרסה חגיגית.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>שירה צלניק</h3><div class="alias">הצלמת הראשית</div>
+      <div class="ev"><b>0</b><span>סימני שאלה, מחוץ ללינקים, ב־4,585 הודעות. שירה לא שואלת. שירה מודיעה.</span></div>
+      <p>29% מכל ההודעות בקבוצה, מקום ראשון. 2,013 תמונות וסרטונים, 44% מכל מה ששירה שלחה. ״לכולם״ ב־336 מתוך 515 הפעמים שהמילה נכתבה, כי כשמברכים, מברכים את כולם. מקום ראשון גם ב״מזל טוב״ (101), ב״אמן״ (83) וב״תהנו״ (115). ובליל 26 ביולי 2026, בין 23:25 ל־23:29: 130 תמונות ברצף. מקורבים מספרים שזה היה היום שהנכדים בילו אצל סבתא.</p>
+      <q>אמא תודה רבה על הכול</q><small>שירה צלניק, 26.7.2026, 17:24. ואחרי שש שעות, האלבום.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>אורית</h3><div class="alias">מחלקת הלב והפרשה</div>
+      <div class="ev"><b>465</b><span>הודעות עם ❤️. מקום ראשון בקבוצה, 29% מכל ה־❤️.</span></div>
+      <p>״שבת שלום״ 185 פעמים, מקום ראשון. ״פרשת״ ב־48 מתוך 72 ו״חודש טוב״ ב־19 מתוך 28, כי מישהו צריך לדעת איזו שבת זו. 🌺 ב־51 מתוך 52 הפעמים שנשלח, ו״מהמם״ 60 פעמים, גם מקום ראשון. בשמונה בבוקר, אורית כבר בקבוצה.</p>
+      <q>תודה על ההזמנה אמא🌺🙏❤️ נבוא בלי נדר</q><small>אורית, 17.7.2025. הנוסח הרשמי של משפחת אלבוחר.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>טל אלבוחר</h3><div class="alias">שר ההרמות</div>
+      <div class="ev"><b>26</b><span>מתוך 43 הפעמים שנכתב בקבוצה ״תעשו חיים״. 60%.</span></div>
+      <p>🍾 ב־39 מתוך 91, 🥂 ב־26 מתוך 44, ו״ושמחת״ ב־28 מתוך 36. כשיש סיבה לחגוג, טל כבר מוזג. מקום שני ב״מזל טוב״ (85), ושעת השיא: שתיים בצהריים, בדיוק בזמן להרמה.</p>
+      <q>זה מה שלמדתם אותנו ❤️ אמא</q><small>טל אלבוחר, 8.7.2026.</small>
+      <q>תעשו חיים ותשמרו על עצמכם ❤️🏖</q><small>טל אלבוחר, 23.6.2026. החתימה הקבועה.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>קרן</h3><div class="alias">משרד ה־💗</div>
+      <div class="ev"><b>41</b><span>מתוך 59 ה־💗 בקבוצה. 69%.</span></div>
+      <p>מקום שני בקבוצה ב־❤️ (287) וב״תהנו״ (53), ו״ותבלו״ ב־14 מתוך 24. אפס הודעות אחרי חצות. ההזמנות מתקבלות תמיד באותה צורה:</p>
+      <q>תודה רבה על ההזמנה נגיע בכיף 💗💗💗</q><small>קרן, 2.7.2026.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>גבי</h3><div class="alias">מחלקת המשאלות</div>
+      <div class="ev"><b>26</b><span>מתוך 29 הפעמים שנכתב ״שיתגשמו״ בקבוצה. גם ״משאלות״ (39 מתוך 56) ו״ליבך״ (35 מתוך 51).</span></div>
+      <p>כלומר: אם כל משאלות הלב במשפחה מתגשמות, יש מישהו לבקר. 13 מילים בממוצע להודעה, ברכות ארוכות ומסודרות. וגם, כשצריך, תפריט:</p>
+      <q>בוקר טוב משפחה יקרה אנחנו נכין מוקפץ</q><small>גבי, 6.11.2025. ההודעה שכולם מחכים לה.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>Yuval</h3><div class="alias">הכתב המדעי</div>
+      <div class="ev"><b>19</b><span>מתוך 37 הפעמים שנכתב ״ורק״ בקבוצה.</span></div>
+      <p>713 הודעות ו־11.7 מילים בממוצע להודעה. כשיש ליקוי, תזכורת או מעבר דירה במשפחה, ההסבר מגיע מ־Yuval. בפירוט.</p>
+      <q>רק שתדעו: / ליקוי החמה הבא שיראה בישראל יהיה ליקוי חלקי, ב-2 באוגוסט 2027.</q><small>Yuval, 7.9.2025. המשפחה התבקשה לשמור את התאריך.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>אורי</h3><div class="alias">הנכד שכותב לסבתא</div>
+      <div class="ev"><b>31</b><span>פעמים ״סבתא״. מקום שלישי בקבוצה.</span></div>
+      <p>354 הודעות, ושלל ברכות ״אוהב״ ו״מאחל״. וגם, מדי פעם, דיווח מאזור זמן אחר:</p>
+      <q>לילה טוב בוקר טוב לא יודע מה זה אצלכם</q><small>אורי, 13.3.2026.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>מאי המלכה מספר 1</h3><div class="alias">מדרך הפרחים</div>
+      <div class="ev"><b>23</b><span>מתוך 23. כל ה״קוצים״ שנכתבו אי פעם בקבוצה, תמיד באותו משפט.</span></div>
+      <p>״שתלך בדרך הפרחים ולא בדרך הקוצים״ היא הברכה של מאי, והיא מגיעה מהר: זמן התגובה החציוני הוא 88 שניות, הכי מהיר בקבוצה. וגם רעיונות לקריירה של סבתא:</p>
+      <q>סבתא צריך לעשות לך טיקטוק😏😊😂❤️</q><small>מאי, 23.6.2026. הקבוצה מחכה לסרטון הראשון.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>אלון</h3><div class="alias">הצלם הצעיר</div>
+      <div class="ev"><b>166</b><span>תמונות וסרטונים מתוך 318 הודעות. יותר מחצי.</span></div>
+      <p>ברכות יום הולדת עם 🥳 בכמויות, וחתימה קבועה: ״אוהב אלון״. ותודה, אחרי כל יום טוב:</p>
+      <q>סבתא תודה היה לי כיף ממש</q><small>אלון, 26.7.2026, 16:29. הראשון להודות.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>לינוי</h3><div class="alias">משמרת הבוקר</div>
+      <div class="ev"><b>8.6%</b><span>מההודעות נשלחו בין חמש לשמונה בבוקר. הכי מוקדם בקבוצה.</span></div>
+      <p>״בכל מעשה ידייך״ היא החתימה, 114 הודעות עם ❤️, ואפס הודעות אחרי חצות. ולמגזין נודע גם על ברכה אחת שכדאי למסגר:</p>
+      <q>ליובל הדוד המושלם !! / המון מזל טוב עד 120 שיהיה לך אושר בריאות ושמחה כל החיים❤️</q><small>לינוי, 18.12.2025. הדוד מאשר.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>רואי</h3><div class="alias">שגריר סבתא</div>
+      <div class="ev"><b>38</b><span>פעמים ״סבתא״. מקום שני בקבוצה, מקום ראשון בין הנכדים.</span></div>
+      <p>4.4 מילים בממוצע להודעה, וכשרואי כותב לסבתא, כל מילה נספרת:</p>
+      <q>המון מזל טוב סבתא יקרה שלי אני אוהב אותך המון🧡🧡</q><small>רואי, 15.4.2026.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>דניאל</h3><div class="alias">קצר ולעניין</div>
+      <div class="ev"><b>68</b><span>תמונות וסרטונים מתוך 100 הודעות.</span></div>
+      <p>3.2 מילים בממוצע להודעה. למה להאריך, כשאפשר להגיד הכל בשורה אחת:</p>
+      <q>תודה סבתא על היום היה כיף</q><small>דניאל, 26.7.2026, 16:30. דקה אחרי אלון.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>איתי</h3><div class="alias">הנואם</div>
+      <div class="ev"><b>95</b><span>הודעות, והרבה מהן ברכות ארוכות לסבתא.</span></div>
+      <p>איתי לא כותב הרבה, אבל כשאיתי כותב, זו ברכה מלאה:</p>
+      <q>המון מזל טוב לינוי היקרה מאחל את כל הטוב שבעולם יום הולדת שמח🥳🥳</q><small>איתי, 9.6.2026.</small>
+    </div>
+
+    <div class="file"><span class="tab">בלעדי</span>
+      <h3>רפאל</h3><div class="alias">האיש של המילה האחת</div>
+      <div class="ev"><b>2.5</b><span>מילים בממוצע להודעה. הכי קצר בקבוצה.</span></div>
+      <p>32 הודעות, 20 מהן תמונות וסרטונים, ואימוג׳ים של משקולת ומכונית. רפאל מדבר בעיקר בתמונות.</p>
+    </div>
+
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><small>בלעדי</small>מתי המשפחה מדברת</h2>
+  <div class="big">
+    <div><b>שישי 10:00</b><span>השעה העמוסה בשבוע. ״שבת שלום״ מתחיל להתחמם.</span></div>
+    <div><b>1,367</b><span>הודעות בכל השבתות ביחד, הכי מעט מכל ימי השבוע.</span></div>
+    <div><b>336</b><span>תשובות הדדיות תוך 5 דקות בין סבתא לשירה. הצמד הכי מדבר.</span></div>
+    <div><b>1,299</b><span>אזכורים של אהבה (״אוהבים״, ❤️, 😘) ב־2025. שנת השיא.</span></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2><small>סיכום</small>השורה התחתונה</h2>
+  <p>השורה התחתונה, ממקורות שלא ניתן לחשוף: משפחת אלבוחר היא לא קבוצת וואטסאפ. היא מערכת שידור רציפה של ברכות, תמונות ו״אהובים״, עם סבתא אחת בעמדת השידור.</p>
+  <div class="diag">
+    <h3>מה צפוי בעונה הבאה</h3>
+    <ol>
+      <li>סבתא פותחת כל בוקר ב״אהובים״. אף אחד לא מתכוון לשנות את זה.</li>
+      <li>שירה תתבקש לשאול שאלה אחת עד סוף השנה. אפשר גם בלי סימן שאלה.</li>
+      <li>טל ימשיך ״תעשו חיים״. 26 פעמים זו התחלה טובה.</li>
+      <li>גבי: כל המשאלות שאיחלת, שיתגשמו גם לך.</li>
+      <li>הטיקטוק של סבתא: בהפקה. מאי מנהלת.</li>
+      <li>ו־Yuval: ב־2 באוגוסט 2027 כולם על הגג. מגיע לכם ליקוי.</li>
+    </ol>
+    <div class="sig">קלוד. מקורות לא נחשפים</div>
+  </div>
+</div></section>
+
+<div class="wrap">
+  <div class="cta"><span>כל המספרים, כל הברכות וכרטיס לכל אחד, בדוח המלא.</span><a href="index.html">לכל הנתונים</a></div>
+</div>
+</article>
+
+<footer><div class="wrap">כל הציטוטים לקוחים מהקבוצה כפי שנכתבו, עם התאריך. המספרים מחושבים על כל 15,685 ההודעות מ־23.12.2019 עד 24.10.2026. ההערות של הטור הן בדיחות. האהבה אמיתית. ❤️</div></footer>
+
+
+<!-- Scoreboard motion layer, shared by the report and the story page.
+     Numbers render final at rest; when they scroll into view each digit drum spins and settles left to right.
+     Anything marked [data-fill] (bars) grows in, [data-draw] (SVG lines) draws in. Reduced motion: nothing moves. -->
+<style>
+::selection { background: #b0435c; color: #f4ede2; }
+html { scrollbar-color: #e2d4bf #f4ede2; }
+input, textarea { caret-color: #b0435c; }
+/* drums must inherit the number's type even where a container styles every span (e.g. stat captions) */
+.odo, .odo span { font-size: inherit !important; color: inherit !important; font-weight: inherit !important; font-family: inherit !important; margin-inline: 0; }
+/* and their layout, even where a container sets display on every span (e.g. story stat captions) */
+.odo, .odo-n { display: inline-flex !important; } .odo-d, .odo-c { display: inline-block !important; } .odo-s, .odo-s > span { display: block !important; }
+.odo { display: inline-flex; direction: inherit; unicode-bidi: isolate; white-space: nowrap; vertical-align: baseline; }
+.odo-n { display: inline-flex; direction: ltr; unicode-bidi: isolate; }
+.odo { flex-wrap: wrap; max-width: 100%; } .odo-n { flex-wrap: nowrap; } /* a word and its number may split across lines on narrow cells; the number itself never does */
+.odo-d { display: inline-block; height: 1.12em; line-height: 1.12em; overflow: hidden; vertical-align: top; position: relative; margin-block: -.06em; }
+.odo-s { display: block; will-change: transform; }
+.odo-s > span { display: block; height: 1.12em; text-align: center; }
+.odo-c { display: inline-block; height: 1.12em; line-height: 1.12em; vertical-align: top; margin-block: -.06em; }
+/* split-flap tiles for the hero figure */
+.flap .odo, .flap .odo-n { gap: .06em; align-items: flex-end; }
+.flap .odo-d { height: 1em; line-height: 1em; margin: 0; padding: 0 .07em; border-radius: .07em; background: linear-gradient(#211b15 0 49.4%, #120f0c 49.4% 50.6%, #1b1612 50.6%); box-shadow: 0 .03em .06em rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.05); }
+.flap .odo-d::after { content: ""; position: absolute; inset-inline: 0; top: 50%; height: 1px; background: rgba(0,0,0,.6); }
+.flap .odo-s > span { height: 1em; }
+.flap .odo-c { height: 1em; line-height: 1em; margin: 0; color: #b0435c !important; }
+#matchclock { position: fixed; top: env(safe-area-inset-top, 0px); inset-inline: 0; height: 3px; z-index: 20; background: linear-gradient(to left, #b0435c, #8f2f47); transform-origin: right; transform: scaleX(0); pointer-events: none; }
+@supports not (animation-timeline: scroll()) { #matchclock { display: none; } }
+@supports (animation-timeline: scroll()) {
+  #matchclock { animation: clockfill linear both; animation-timeline: scroll(root); }
+  @keyframes clockfill { to { transform: scaleX(1); } }
+}
+@media (prefers-reduced-motion: reduce) { #matchclock { display: none; } }
+</style>
+<div id="matchclock" aria-hidden="true"></div>
+<script>
+window.Scoreboard = (() => {
+  const calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const DRUM = 'cubic-bezier(.16,1,.3,1)';            // drums never overshoot: they'd show digits past the end
+  const EASE = window.SB_EASE || DRUM;                   // bars and lines may bounce (skin choice)
+  const LOOPS = 3; // each drum holds 0-9 three times so low digits can spin past
+
+  // Turn the leading text of el into digit drums showing the final value.
+  // Numbers become LTR runs of drums; words around them stay whole, in the surrounding direction.
+  function build(el) {
+    if (el.dataset.odo) return;
+    let node = [...el.childNodes].find((n) => n.nodeType === 3 && /\d/.test(n.nodeValue));
+    if (!node) return;
+    const text = node.nodeValue, wrap = document.createElement('span');
+    wrap.className = 'odo'; wrap.setAttribute('aria-label', text.trim());
+    const drums = [];
+    for (const run of text.match(/[\d][\d,.:]*\d|\d|[^\d]+/g) || []) {
+      if (/\d/.test(run)) {
+        const num = document.createElement('span'); num.className = 'odo-n'; num.setAttribute('aria-hidden', 'true');
+        for (const ch of run) {
+          if (/\d/.test(ch)) {
+            const d = document.createElement('span'), s = document.createElement('span');
+            d.className = 'odo-d'; s.className = 'odo-s';
+            for (let k = 0; k < LOOPS * 10; k++) { const c = document.createElement('span'); c.textContent = k % 10; s.appendChild(c); }
+            const target = (LOOPS - 1) * 10 + +ch;
+            s.style.transform = `translateY(${-target / (LOOPS * 10) * 100}%)`;
+            d.appendChild(s); num.appendChild(d); drums.push({ s, target });
+          } else {
+            const c = document.createElement('span'); c.className = 'odo-c'; c.textContent = ch; num.appendChild(c);
+          }
+        }
+        wrap.appendChild(num);
+      } else {
+        const c = document.createElement('span'); c.className = 'odo-c odo-w'; c.setAttribute('aria-hidden', 'true');
+        c.textContent = run.replace(/ /g, '\u00a0'); wrap.appendChild(c);
+      }
+    }
+    node.replaceWith(wrap);
+    el.dataset.odo = '1';
+    el._drums = drums;
+  }
+
+  function spin(el, delay = 0) {
+    if (calm || !el._drums) return;
+    // every drum spins up from 0 through two full turns; left drums settle first, like a scoreboard locking in
+    const pct = (k) => `translateY(${-k / (LOOPS * 10) * 100}%)`;
+    el._drums.forEach(({ s, target }, i) => {
+      s.animate([{ transform: pct(0), filter: 'blur(1.5px)' }, { offset: .7, filter: 'blur(.6px)' }, { transform: pct(target), filter: 'blur(0)' }],
+        { duration: 950 + i * 120, delay, easing: DRUM, fill: 'backwards' });
+    });
+  }
+
+  function fill(el, delay = 0) {
+    if (calm) return;
+    const ax = el.dataset.fill === 'y' ? 'scaleY' : 'scaleX';
+    el.animate([{ transform: ax + '(0)' }, { transform: ax + '(1)' }],
+      { duration: 1000, delay, easing: EASE, fill: 'backwards' });
+  }
+
+  function draw(path, delay = 0) {
+    if (calm || !path.getTotalLength) return;
+    const L = path.getTotalLength();
+    path.style.strokeDasharray = L;
+    path.animate([{ strokeDashoffset: L }, { strokeDashoffset: 0 }], { duration: 1800, delay, easing: EASE, fill: 'backwards' })
+      .finished.then(() => { path.style.strokeDasharray = ''; }).catch(() => {});
+  }
+
+  // Watch groups: when a group enters view, everything inside it plays once, staggered.
+  function watch(root, opts = {}) {
+    const roll = opts.roll || '[data-roll]';
+    root.querySelectorAll(roll).forEach(build);
+    if (calm || !('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        io.unobserve(e.target);
+        const g = e.target;
+        const nums = g.matches(roll) ? [g] : [...g.querySelectorAll(roll)];
+        nums.forEach((el, i) => spin(el, Math.min(i, 12) * 70));
+        g.querySelectorAll('[data-fill]').forEach((el, i) => fill(el, Math.min(i, 24) * 30));
+        g.querySelectorAll('[data-draw]').forEach((el) => draw(el, 100));
+        if (g._onEnter) g._onEnter();
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -18% 0px' });
+    root.querySelectorAll(opts.groups || '[data-group]').forEach((g) => io.observe(g));
+  }
+
+  return { build, spin, fill, draw, watch, calm };
+})();
+</script>
+
+<script>
+(() => {
+  const SB = window.Scoreboard; if (!SB) return;
+  document.querySelectorAll('.big, .file, .pull').forEach((g) => g.setAttribute('data-group', ''));
+  SB.watch(document, { roll: '.big b, .file .ev b, .pull' });
+})();
+</script>
+
+</body>
+</html>
